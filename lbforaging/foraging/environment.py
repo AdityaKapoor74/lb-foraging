@@ -457,8 +457,9 @@ class ForagingEnv(Env):
             nobs = tuple([make_obs_array(obs) for obs in observations])
         nreward = [get_player_reward(obs) for obs in observations]
         ndone = [obs.game_over for obs in observations]
-        # ninfo = [{'observation': obs} for obs in observations]
-        ninfo = {}
+        # ninfo = [{'num_food': obs} for obs in observations]
+        ninfo = {"num_food_left": (self.field>0).sum()}
+        # ninfo = {}
         
         # check the space of obs
         for i, obs in  enumerate(nobs):
@@ -564,6 +565,7 @@ class ForagingEnv(Env):
             # and the food is removed
             self.field[frow, fcol] = 0
 
+        # print(self.field.sum())
         self._game_over = (
             self.field.sum() == 0 #or self._max_episode_steps <= self.current_step
         )
