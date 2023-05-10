@@ -89,7 +89,7 @@ class ForagingEnv(Env):
         self.logger = logging.getLogger(__name__)
         self.seed()
         self.players = [Player() for _ in range(players)]
-
+        
         self.field = np.zeros(field_size, np.int32)
 
         self.penalty = penalty
@@ -565,7 +565,7 @@ class ForagingEnv(Env):
             self.field[frow, fcol] = 0
 
         self._game_over = (
-            self.field.sum() == 0 or self._max_episode_steps <= self.current_step
+            self.field.sum() == 0 #or self._max_episode_steps <= self.current_step
         )
         self._gen_valid_moves()
 
